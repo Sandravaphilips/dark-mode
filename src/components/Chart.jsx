@@ -1,4 +1,5 @@
 import React from "react";
+// import useDarkMode from "../hooks/useDarkMode";
 import moment from "moment";
 import {
   LineChart,
@@ -9,7 +10,9 @@ import {
   Tooltip
 } from "recharts";
 
-const Chart = ({ sparklineData }) => {
+const Chart = ({ sparklineData, strokeValue }) => {
+  // const [darkMode, ] = useDarkMode('value', false);
+  // const [strokeColor, setStrokeColor] = useState('')
   const formattedData = sparklineData
     .map((price, idx) => {
       if (idx % 6 === 0) {
@@ -24,11 +27,18 @@ const Chart = ({ sparklineData }) => {
       }
       return null;
     })
-    .filter(data => data);
-
+  .filter(data => data);
+  
+  // useEffect(() => {
+  //   // debugger
+  //   const body = document.querySelector('body');
+  //   (body.className === 'dark-mode') ? setStrokeColor('#d884c6') : setStrokeColor('#8884d8')
+  // }, [])
+  // let strokeValue = darkMode ?'#d884c6' : '#8884d8';
+  // console.log(strokeValue)
   return (
     <LineChart width={1100} height={300} data={formattedData}>
-      <Line type="monotone" dataKey="value" stroke="#8884d8" />
+      <Line type= "monotone" dataKey="value" stroke={strokeValue} />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
       <XAxis dataKey="date" interval={3} />
       <YAxis />
